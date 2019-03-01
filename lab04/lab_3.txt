@@ -1,0 +1,35 @@
+Exercise 4.3
+
+Drug Testing
+
+i. P(user) = <p(user), p(-user)> = <p(user), 1 - p(user)> = <0.089, 0.911>
+
+ii. p(test|user) = 0.99
+
+iii. p(-test|user) = 1 - p(test|user) = 0.01
+
+iv. p(test|-user) = 1 - p(-test|-user) = 1 - 0.98 = 0.02
+
+v. P(user|test) = <p(user|test), 1-p(user|test)>
+
+    p(user|test) = p(test|cancer) * p(cancer) / p(test)
+                = p(test|user) * p(cancer) / (p(test|cancer) * p(Cancer) + p(test|!cancer) * p(!cancer))
+                = (0.8 * 0.01) / (0.8 * 0.01 test 0.096 * 0.99)
+                = 0.0776
+
+Breast Cancer
+
+p(cancer|+) = p(+|cancer) * p(cancer) / p(+)
+            = p(+|cancer) * p(cancer) / (p(+|cancer) * p(Cancer) + p(+|!cancer) * p(!cancer))
+            = (0.8 * 0.01) / (0.8 * 0.01 + 0.096 * 0.99)
+            = 0.0776
+
+p(!cancer|+) = p(+|!cancer) * p(!cancer) / p(+)
+             = p(+|!cancer) * p(!cancer) / (p(+|cancer) * p(Cancer) + p(+|!cancer) * p(!cancer))
+             = (0.096 * 0.99) / (0.8 * 0.01 + 0.096 * 0.99)
+             = 0.92236024844
+
+(which is of course just 1 - p(cancer|+))
+
+
+

@@ -1,0 +1,76 @@
+Exercise 2.1:
+
+a. Both of them appear to solve the original problem.
+   However increasing the maximum to 30000, lead to some inaccuracy for the
+   simulated annealing solution, while the hill-climbing solution still worked.
+
+b. Hill climbing is happening much quicker than simulated annealing.
+
+    Initial                      x: 10		value: 10.0
+    Hill-climbing solution       x: 15.0	value: 15.0	time: 5.7697296142578125e-05
+    Simulated annealing solution x: 15.0	value: 15.0	time: 0.0047376155853271484
+
+c. Shifting the initial start to be pretty far away, say 3000 for the original setup,
+   the simulated annealing solution is actually quicker than the hill-climbing solution.
+
+    Initial                      x: 3000		value: -2970.0
+    Hill-climbing solution       x: 15.0	value: 15.0	time: 0.018639326095581055
+    Simulated annealing solution x: 2736.0	value: -2706.0	time: 0.0043792724609375
+
+   Any of the random values in the range provided by default should be similar enough...
+
+d. Using a smaller delta step (like 0.1) or a larger delta step (2) tends to make it more
+   likely that the solution can't find the actual maximum. If however you pick something like
+   a step size of 5 and randomly get an initial starting point like 10, it is possible to
+   get the proper maximum since the step size won't overshoot the maximum.
+   I have no idea why smaller deltas don't work though...
+
+e. scheduling for simulated annealing is the user-defined function to describe how much jumping room
+   the algorithm has to jump around early on and how quickly that flexibility tapers off as it progresses.
+
+
+
+Exercise 2.2:
+
+a. Not unsurprisingly the hill-climbing algorithm is only able to find the local maximum
+   nearest the initial value. The simulated annealing solution generally seems to find a better
+   solution, but not necessarily the global maximum.
+
+b. It decides which hill is most likely to be climbed, making the solution found by hill-climbing
+   especially dependent on the initial value.
+
+c. It wouldn't impact the hill-climbing solution too much as long as it didn't become larger than
+   the width of the base of the hills, however for a small delta the simulated anneal might not get too
+   far away either.
+
+d. The x's range from 0-30 and the y's seem to also range from 0-30. Typically the hill-climbing solution
+   tends to do worse finding and being content with lower hills close to the initial value, whereas the
+   simulated annealing solution tends to find higher values (potentially going above 30 since the delta
+   addition was never genuinely limited to [0, 30].
+
+Exercise 2.3:
+
+a. Hill-climbing especially improves since it can now try different local maximums out for size.
+   However, simulated annealing still appears to be doing better.
+
+b. Interestingly, on average they both appear to do similarly well after a good number of iterations
+
+    Iterations: 1000
+    Hill-climbing solution       x: 30.0	value: 29.640948722785854	avg: 14.634
+    Simulated annealing solution x: 42.0	value: 38.49390501245662	avg: 15.959
+
+c. Simulated annealing still does do a decent job on average or not, however, it is still overshooting
+   since the actions aren't bound to the [0,30] range and the |x * sin(x)| function continues to grow...
+
+Exercise 2.4
+
+a. I think hill-climbing makes the most sense for local beam search since the idea of taking a bad step now
+   hoping for a better step later seems counter-intuitive to the beam-search concept (if I'm understanding
+   the wikipedia page...) The localness of hill-climbing can be mitigated by the beam search itself somewhat.
+
+b. I suppose it would be limited to however many threads you can afford on your computer without noticeable
+   impacting other processes.
+
+c. Instead of running the processes sequentially looking for the best of several places, I would start in
+   m different initial points, choose the best next m positions, and essentially run the algorithm concurrently
+   rather than iteratively...

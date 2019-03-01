@@ -1,0 +1,52 @@
+Exercise 3.1
+
+a.
+    Depth-first search fails on even the "easy" problem.
+    AC3 fails on the harder puzzle.
+    backtracking succeeds on the easy problem, but took several minutes before I gave up on the "harder" puzzle.
+    min_conflicts fails on even the "easy" problem.
+
+b. Setting mrv and forward checking enables it to actually solve both the "harder" and the "hardest" puzzles almost instantaneously now.
+   Independently doesn't seem to be effective.
+
+   It definitely works best with back-tracking and mrv and forward-checking enabled.
+   Using a minimum-remaining-values heuristic seems to always be a good idea.
+
+
+Exercise 3.2
+
+
+a.
+    depth-first search has a bug (can't get beyond 1)
+    AC3 is also failing even with n=1
+    vanilla backtracking seems to succeed up until about n=22
+    min_conflicts seems to often succeed even with n >= 2000
+
+b.
+    Not knowing any other settings, enabling forward-checking and mrv seemed worth a shot.
+    It was still working sucessfully with n around 128. Minimum remaining values seems useful
+    in a Queens like problem, since shifting around the placement of the queens could be done in
+    so many different ways with an nxn board, but by focusing on the ways in which each queen restricts the
+    board you don't have to process as many options before determining if you have or do not have
+    a valid solution.
+
+c. It depended on the run, most of the time it seemed to find a solution for 128 queens in 20-60 or so steps,
+   but sometimes it was closer to 150 and once I think I saw it take 0 steps.
+
+Exercise 3.3
+
+a. The CSP model looks at list of variables and a list (or rather dict) of domain values that all the variables can take.
+    In the code, it's specified that while it doesn't match the textbook definition, it's a nicer more compact format in
+    most cases. The titular constraint(A,a, B, b) function handles most of the additional restrictions on the problem.
+
+    The traditional search specification is a little simpler since you only have to define the actions that can move you
+    from state to state and a goal test that tells you if yo've made it there yet.
+
+    In the CSP scenario, you don't have to define a goal test as it were, but instead just will try to minimize conflicting
+    constraints until you have a less awful solution.
+
+b.
+    In traditional search problems, it feels like the heuristics are embedded into the action switching portion or not
+    included at all. In constraint-based problem solving you can use separate heuristics to evaluate the various options
+    available to you and take the path with fewer conflicts or minimum remaining values...
+

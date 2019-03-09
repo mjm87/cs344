@@ -1,0 +1,15 @@
+1 - (7/12(-5/7*lg(5/7) + -2/7*lg(2/7)) + 5/12(-1/5*lg(1/5) + -4/5*lg(4/5)))
+
+Gain(A) = Entropy(V) - Remainder(A)
+Entropy(V) = 1 # see class
+Remainder(A) = 7/12 Entropy(hungry) + 5/12 Entropy(not hungry)
+Entropy(hungry) = 5/7 lg(5/7) + 2/7 lg(2/7)
+Entropy(not hungry) = 1/5 lg(1/5) + 4/5 lg(4/5)
+
+Gain = 1 - (7/12(-5/7*lg(5/7) + -2/7*lg(2/7)) + 5/12(-1/5*lg(1/5) + -4/5*lg(4/5)))
+     = 0.1957096288
+
+So essentially, knowing whether someone is hungry or not does tell us something
+but not quite as much as knowing the # of patrons inside, but also not as little
+as only knowing the restaurant type.
+

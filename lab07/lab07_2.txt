@@ -1,0 +1,50 @@
+a.
+
+    Categorical data is often qualitative rather than quantitative data, that often is represented as textual data
+    rather than numeric. This would be things like a favorite color (i.e "Blue") or a person's state (i.e. "Michigan").
+    Sometimes even numeric data should be treated as categorical, a student id could be an example.
+
+    Numerical data is more typically quantitative rather than qualitative and of course is a number (either a float
+    or an int) and
+
+b.
+
+Task 1:
+
+    train_model(
+        learning_rate=0.0001,
+        steps=100,
+        batch_size=1
+    )
+
+    Final RMSE (on training data): 167.02
+
+
+Task 2:
+
+    train_model(
+    learning_rate=0.0001,
+    steps=100,
+    batch_size=1,
+    input_feature="population"
+    )
+
+    Final RMSE (on training data): 192.08
+
+    Turns out the "solution" parameters worked better than any of my attempts with population:
+
+    Final RMSE (on training data): 176.04. It looks like part of their difference was drastically increasing step size.
+
+c.
+
+The hyper-parameters appear to be learning_rate, steps, and batch_size alongside the feature being looked at.
+While there isn't a standard formula for determining what hyperparameters to use, there are some rules of thumbs to consider.
+
+1. Training error should be going down, quickly at first, and eventually plateauing
+    - if it doesn't plateau, try it again but longer
+    - if it isn't decreasing quickly enough, try increasing the learning rate
+        but don't increase it too high, otherwise it might start hurting rather than helping
+    - if training error varies wildly, try decreasing the learning rate
+2. Small batch sizes call instability
+    (try larger sizes like 100 or 1000 and then decrease until just before it becomes degradation)
+3. Effects are data-dependent (always experiment and verify)

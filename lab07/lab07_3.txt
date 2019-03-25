@@ -1,0 +1,31 @@
+Questions:
+
+a. Submit solutions to tasks 1–3.
+
+    Task 1:
+
+        california_housing_dataframe["rooms_per_person"] = california_housing_dataframe["total_rooms"] / california_housing_dataframe["population"]
+
+    Task 2:
+
+        import matplotlib.pyplot as plt
+        plt.scatter(calibration_data.predictions, calibration_data.targets)
+
+    Task 3:
+
+        california_housing_dataframe["rooms_per_person"] = california_housing_dataframe["rooms_per_person"].apply(lambda x: max(x, 0.05))
+        plt.subplot(1,2,2)
+        _ = california_housing_dataframe["rooms_per_person"].hist()
+
+b. What is the purpose of introducing synthetic features?
+
+    So presumably we're introducing synthetic features (like rooms_per_person) to increase the performance and
+    fit the regresssion line to the data. Typically, I would hope that we're not just randomly trying different
+    synthetic features, but that we at least have a hypothesis for why this manipulation on the data makes sense.
+    In some cases, this might simply be because the data we were able to collect wasn't something that we could
+    directly collect but could be calculated or approximated from collectable data.
+
+c. What are outliers and what is typically done with them?
+
+    Outliers are data points that fall outside the regular range of values expected. They're typically considered
+    mistakes or extreme cases that can be more or less ignored, like we're doing here.

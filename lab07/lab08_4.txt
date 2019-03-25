@@ -1,0 +1,70 @@
+a. Submit solutions to tasks 1–5.
+
+    Task 1
+
+        For some reason, the standard deviation for "total_rooms" and "population" seem to be abnormally large, making
+        me suspicious of any of the values there. The maximum values seem to be far higher than might be regularly
+        expected compared to the 75% marks indicating some severe outliers could be present, similarly some of the minimums
+        seem too low as well.
+
+    Task 2
+
+        Looking at the difference between the training_examples and the validation_examples, for the most part they do
+        look mostly similar, however some do have some strange differences up to a 7000 population difference
+        in the maximums of the two sets. I'm not entirely certain, what the solution was intending with the difference
+        between the two data sets, since the distribution of values (at least in the 25% splits) seem roughly equal to me
+        though of course the plots show a drastically different picture.
+
+    Task 3
+
+        Turns out the bug was the commented out code that randomizes the data a bit.
+        After uncommenting that out, the validation data plot looks quite a bit more like the training data now.
+
+    Task 4
+
+        # 1. Create input functions.
+        training_input_fn = lambda: my_input_fn(
+            training_examples,
+            training_targets["median_house_value"],
+            batch_size=batch_size)
+        predict_training_input_fn = lambda: my_input_fn(
+            training_examples,
+            training_targets["median_house_value"],
+            num_epochs=1,
+            shuffle=False)
+        predict_validation_input_fn = lambda: my_input_fn(
+            validation_examples, validation_targets["median_house_value"],
+            num_epochs=1,
+            shuffle=False)
+
+
+        # 2. Take a break and compute predictions.
+        training_predictions = linear_regressor.predict(input_fn=predict_training_input_fn)
+        training_predictions = np.array([item['predictions'][0] for item in training_predictions])
+
+        validation_predictions = linear_regressor.predict(input_fn=predict_validation_input_fn)
+        validation_predictions = np.array([item['predictions'][0] for item in validation_predictions])
+
+
+    Task 5
+
+        training_input_fn = lambda: my_input_fn(
+            training_examples,
+            training_targets["median_house_value"],
+            batch_size=batch_size)
+        predict_training_input_fn = lambda: my_input_fn(
+            training_examples,
+            training_targets["median_house_value"],
+            num_epochs=1,
+            shuffle=False)
+        predict_validation_input_fn = lambda: my_input_fn(
+            validation_examples, validation_targets["median_house_value"],
+            num_epochs=1,
+            shuffle=False)
+
+b. Give a one-paragraph summary of what you learned about using training, validation and testing datasets.
+
+    So firstly, apparently randomization is awfully important in ensuring that your validation and training
+    data seem similar enough and that a lot of work is often done pre-processing data, adding in synthetic features,
+    etc. Of course, too much work and you might get too close and overfit to the data you have rather than being able
+    to generalize to practical applications.

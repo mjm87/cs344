@@ -1,0 +1,20 @@
+Exercise 1
+
+cities['Saintly'] = cities['City name'].apply(lambda val: "San" in val) & cities['Area square miles'].apply(lambda val: val > 50)
+cities
+
+Exercise 2
+
+cities.reindex([0,1,3])
+
+
+b. While I'm not very familiar with NumPy, the dataframe and series nature of Pandas seem to conform much closer to
+ what I'm used to with how languages like R work. NumPy it seems is still useable with Pandas data structures, and so
+ in a way,we get the best of both worlds.
+
+c. Reordering could be used to insert data into a dataframe and potentially to structure it better for data access,
+if it were being used like a database anyways. But reshuffling seems more useful to ensure that the output of our
+algorithms isn't dependent on the order the data is presented. And typically, when I'm thinking of science-y sorts of
+experiments, randomness is always a large plus, so I wouldn't be surprised if some of the statistical basis for some
+of the algorithms would play better in random scenarios than in some more ordered structure.
+[this is me from the future: apparently indeed "pathological ordering effects" can harm Stochastic Gradient Descent.]

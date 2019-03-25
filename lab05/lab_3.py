@@ -27,6 +27,11 @@ print("P(Raise | happy ^ !sunny) => " +
       enumeration_ask('Raise', dict(Happy=T, Sunny=F), happiness).show_approx())
 
 
+print("P(Raise | happy ^ !sunny) => " +
+      enumeration_ask('Raise', dict(), happiness).show_approx())
+
+
+
 # given how small the probability of having a raise in this domain is, I suppose
 # it's not surprisingly though it's doubtlessly disappointing how low the probability
 # of a raise is given happiness. Thankfully, knowing that it's not sunny out does

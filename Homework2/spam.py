@@ -75,17 +75,17 @@ ham_corpus = ["do", "i", "like", "green", "eggs", "and", "ham", "i", "do"]
 all_tokens = spam_corpus + ham_corpus
 all_tokens = list(dict.fromkeys(all_tokens))
 
-spam_dict = {}
-ham_dict = {}
+spam_counts = {}
+ham_counts = {}
 
 for token in all_tokens:
-    spam_dict[token] = 0
-    ham_dict[token] = 0
+    spam_counts[token] = 0
+    ham_counts[token] = 0
 
 
 def prob(token):
-    good = 2 * ham_dict[token]
-    bad = spam_dict[token]
+    good = 2 * ham_counts[token]
+    bad = spam_counts[token]
     n_bad = 2
     n_good = 2
     # count threshold of 1
@@ -97,16 +97,16 @@ def prob(token):
 # Determine occurrences of each word in each corpus:
 # - the spam corpus
 for token in spam_corpus:
-    spam_dict[token] += 1
+    spam_counts[token] += 1
 
 # - the ham corpus
 for token in ham_corpus:
-    ham_dict[token] += 1
+    ham_counts[token] += 1
 
 # just to verify that my occurrence tables are rational
 print(all_tokens)
-print("spam: " + str(spam_dict))
-print("ham: " + str(ham_dict))
+print("spam: " + str(spam_counts))
+print("ham: " + str(ham_counts))
 
 ## Second Step: Calculate spam probabilities for each token
 
@@ -123,22 +123,39 @@ probabilities = {}
 for token in all_tokens:
     probabilities[token] = prob(token)
 
+
 # grabbing the first 15 values furthest from 50%
-count = 0
-probs = []
-weighted_scores = sorted(probabilities.items(), key=lambda x: -abs(x[1]-0.5))
-for item in weighted_scores:
-    probs.append(item[1])
-    count += 1
-    if count > 15: break
+def get_top_interesting_values(values, limit=15):
+    # calculate the probability that the message is spam given each word separately
+    probabilities = {}
+    for i in values:
+        probabilities[i] = prob(i)
+
+    # sort the probabilities by how "interesting" each value is
+    # i.e. how far away from 50% it is
+    sorted_values = sorted(probabilities.items(), key=lambda x: -abs(x[1]-0.5))
+
+    count = 0
+    interesting = []
+
+    # grab the most "interesting" values to evaluate the email
+    for item in sorted_values:
+        interesting.append(item[1])
+        count += 1
+        # stop once we hit get 15 or so values
+        if count > limit:
+            break
+
+    return interesting
 
 print(probs)
 
 from functools import reduce
-prod = reduce((lambda x, y: x * y), probs)
-compl = reduce((lambda x, y: x * y), list(map(lambda x: 1 - x, probs)))
 
-value = prod / (prod + compl)
-
+def is_spam(featured_probs):
+    prod = reduce((lambda x, y: x * y), featured_probs)
+    compl = reduce((lambda x, y: x * y), list(map(lambda x: 1 - x, featured_probs)))
+    value = prod / (prod + compl)
+    return value
 print(value)
 

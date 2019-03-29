@@ -1,0 +1,66 @@
+a. What does the Pearson correlation coefficient measure? Identify one example value
+   from the correlation table you compute and explain why it makes sense.
+
+   Technically it's the covariance of the two variables divided by the respective standard deviations.
+   More meaningfully it's used as a measure of how closely two variables are correlated and in which direction.
+   When it's close to 0, there isn't a relationship between the two variables, the closer it gets to -1 or 1
+   the more related they are. The positive/negative aspect of it looks at the direction of the correlation.
+   If it's positive, as x increases, so will y, if it's negative, as x increases y will likely decrease.
+
+   A dumb example would be latitude compared to latitude, in which a correlation coefficient of 1 has to be the case
+   since they are identical. More interestingly, the correlation coefficient of 0.9 between total_bedrooms and
+   total rooms indicates that as the number of rooms you have increases, so will the number of bedrooms. This isn't 1.0
+   of course since you could be adding on additional bathrooms or living rooms and other non-bedrooms, but such a high
+   correlation coefficient does indicate that typically the more rooms you have, the more bedrooms you are likely to have.
+
+b. Submit your solutions to tasks 1–2. Include the features you selected for task 1 and
+   the synthetic features you developed for task 2; include the final RMS errors but not
+   the training output. Did you beat the Google-provided baselines?
+
+   Task 1:
+
+    minimal_features = [
+        "median_income",
+        "total_bedrooms",
+        "housing_median_age"
+    ]
+
+    minimal_training_examples = training_examples[minimal_features]
+    minimal_validation_examples = validation_examples[minimal_features]
+
+    train_model(
+        learning_rate=0.01,
+        steps=5000,
+        batch_size=50,
+        training_examples=minimal_training_examples,
+        training_targets=training_targets,
+        validation_examples=minimal_validation_examples,
+        validation_targets=validation_targets)
+
+    RMSE: 113.39
+
+
+
+    Task 2:
+
+    training_examples["distance_from_san_francisco"] = training_examples["latitude"] - 38
+    validation_examples["distance_from_san_francisco"] = validation_examples["latitude"] - 38
+
+    minimal_training_examples = training_examples[["distance_from_san_francisco"]]
+    minimal_validation_examples = validation_examples[["distance_from_san_francisco"]]
+
+    _ = train_model(
+        learning_rate=0.01,
+        steps=5000,
+        batch_size=50,
+        training_examples=minimal_training_examples,
+        training_targets=training_targets,
+        validation_examples=minimal_validation_examples,
+        validation_targets=validation_targets)
+
+    RMSE: 115.94
+
+
+    For task 1, I got close to Google's RMSE, but interestingly, I ended up beating google a little bit for task 2.
+    A large part of that is probably the increased number of steps, but also because I ended up not taking the bucket
+    approach

@@ -1,0 +1,62 @@
+a. They recommend FTRL for L1 optimization, but the code specifies the same rate (learning_rate) for all runs.
+   How is FTRL managing the learning rate?
+
+        It looks like the FTRLOptimizer's learning_rate_power is -0.5 which appears to modify learning rate.
+
+b. What good does the bucketing/binning do?
+
+    Bucketing allows us to bin / categorize our data allowing instead of assuming that there is a continuous relationship.
+    Similar to the latitude-longitude cross below, there might be certain areas that would make sense to have higher income
+    or something like that, but income wouldn't be a function of location, but rather a function of whether your location
+    was in a high-income zone. By binning our data we can create some categorical relationships that might make more sense
+    than the numerical latitude/longitude
+
+c. Submit your solutions to tasks 1–2. Did you find their task 1 bucketing to make sense?
+   Identify one unique feature cross for task 2 and explain how it could be useful.
+
+   Task 1:
+
+      # Divide households into 7 buckets.
+      bucketized_households = tf.feature_column.bucketized_column(
+        households, boundaries=get_quantile_based_boundaries(
+          training_examples["households"], 7))
+
+      # Divide longitude into 10 buckets.
+      bucketized_longitude = tf.feature_column.bucketized_column(
+        longitude, boundaries=get_quantile_based_boundaries(
+          training_examples["longitude"], 10))
+
+      # Divide latitude
+      bucketized_latitude = tf.feature_column.bucketized_column(
+        latitude, boundaries=get_quantile_based_boundaries(
+          training_examples["latitude"], 10))
+
+      # Divide housing median age
+      bucketized_housing_median_age = tf.feature_column.bucketized_column(
+        housing_median_age, boundaries=get_quantile_based_boundaries(
+          training_examples["housing_median_age"], 5))
+
+      # Divide median income
+      bucketized_median_income = tf.feature_column.bucketized_column(
+        median_income, boundaries=get_quantile_based_boundaries(
+          training_examples["median_income"], 5))
+
+      # Divide rooms per person
+      bucketized_rooms_per_person = tf.feature_column.bucketized_column(
+        rooms_per_person, boundaries=get_quantile_based_boundaries(
+          training_examples["rooms_per_person"], 4))
+
+      I'm not entirely certain why they decided to use 7 buckets for everything barring longitude and latitude, but
+      I'm not certain how many buckets really matter without a better understanding of the data.
+
+   Task 2:
+
+        long_x_lat = tf.feature_column.crossed_column(
+            ['longitude','latitude'],
+            1000,
+            None
+        )
+
+        Another potential feature-cross could be housing_median_age X total_rooms.
+        This combination might potentially give us some insight if for example having a 10 room house
+        50 years ago was far more impressive than a 10 room house today or something like that.

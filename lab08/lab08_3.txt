@@ -1,0 +1,33 @@
+1. Compare and contrast Seaborn vs. MatPlotLib.
+
+    Just looking through the tutorial, Seaborn seems to be used for specific pre-generated plots
+    whereas MatPlotLib is easier to create simple but custom plots by "hand".
+
+    Looking online, it appears that Seaborn is complimentary to MatPlotLib
+    and does indeed focus in on some of the more statistical plots. Particularly,
+    apparently Seaborn has much better support for Pandas DataFrames.
+    https://www.datacamp.com/community/tutorials/seaborn-python-tutorial#sm
+
+2. How big is this dataset and does it seem of an appropriate size for this problem?
+
+    It appears to have 397 rows of data (judging from the tail() command)
+    Knowing nothing about fuel efficiency of old automobiles, I have no real inkling about the effectiveness of the size.
+    But 400-ish data points seems like a fair sample for statistical approaches,
+    so I suspect it might be okay for machine learning as well.
+
+3. Explain what the prescribed normalization of the data does.
+
+    The normalization of the data is intended to help the model converge faster and
+    remove the dependency of the model on the units used in the input.
+
+4. Is this an example of a linear regression model?
+
+    It appears to be so.
+    This is apparently a regression problem, since we're looking to estimate fuel efficiency which would be a continuous value.
+
+5. In their conclusion, they claim that smaller datasets “prefer” smaller networks. Do you agree? Explain your answer.
+
+    I would expect so. Especially in stats courses I've taken, overfitting has always been a concern and the primary
+    approach to handling it was to limit the parameters given to the model so that it would more easily generalize to
+    other data. While larger networks isn't quite the same as a linear model with an overabundance of parameters,
+    I suspect there's enough similarity that the size of your data should impact the optimal size of the network.

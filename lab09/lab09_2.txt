@@ -1,0 +1,15 @@
+Why are we regularizing with respect to sparsity?
+
+By encouraging the weights to be zero, we can treat the model as if those weights don't exist, which should limit
+some of the potential for overfitting, which hopefully leads to more generalizable models.
+
+How does L1 regularization increase sparsity?
+
+According to the internet it appears that L1 regularization essentially just penalizes a parameter for non-zero values.
+Thus, the benefit added for using that parameter must be substantial, otherwise the penalty will lean the model towards not including it.
+https://towardsdatascience.com/l1-and-l2-regularization-methods-ce25e7fc831c
+
+
+Task 1: Here, just report the best log loss value / model size you can get and what gamma value you used to get them.
+
+logloss: 0.25; model size: 634; gamma: 0.5

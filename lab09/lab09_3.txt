@@ -1,0 +1,43 @@
+Exercise 1:
+What's the size of the cats/dogs datasets?
+
+The exercise uses 2000 images from the 25000 images available in the dataset.
+
+How does the first convnet compare with the one we did in class.
+
+It has a similar pattern of cnn/maxpooling stacks, but individual CNN layers are
+much larger giving us 9,495,561 parameters instead of the "mere" 93, 322 parameters used in class
+
+Also, instead of using soft-max it uses sigmoid for the output layer.
+
+Can you see any interesting patterns in the intermediate representations?
+
+It appears to be recognizing outlines of the dog. Initially it seems to recognize 
+the outline of the horizon as well, but seems to lose that as it goes along.
+
+Exercise 2:
+
+What is data augmentation?
+
+It appears to be making a number of random transformations to the training 
+examples so that the model will never see the same picture twice. 
+
+Report your best results and the hyperparameters you used to get them.
+
+I ended up with a final epoch state like 
+loss: 0.4412 - acc: 0.7810 - 20s - loss: 0.4889 - acc: 0.7905 - val_loss: 0.4412 - val_acc: 0.7810
+
+compared with the solution state:
+loss: 0.5541 - acc: 0.7080 - 20s - loss: 0.5341 - acc: 0.7450 - val_loss: 0.5541 - val_acc: 0.7080
+
+which seems better to me, but not substantially though the graph was definitely not what I was hoping 
+for with dramatic and chaotic shifts in both the training and validation lines, but the solution charts
+are just as messy.
+
+history = model.fit_generator(
+	train_generator,
+	steps_per_epoch=50,
+	epochs=30,
+	validation_data=validation_generator,
+	validation_steps=50,
+	verbose=2)

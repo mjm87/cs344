@@ -1,3 +1,22 @@
 a. Task 1: What does the confusion matrix show for this example?
-b. Task 2: How does the TensorFlow network architecture differ from the Keras example given in class? Report any improvements you can make over the baseline testset accuracy for this task.
+
+    Primarily it appears that the model predicts the true value (the diagonal is pretty black),
+    however, there is some slight confusion with some values, perhaps 20% of the time a 4 might 
+    be mistrued for a 9 or a 5 for an 8.
+
+b. Task 2: How does the TensorFlow network architecture differ from the Keras example given in class? 
+           Report any improvements you can make over the baseline testset accuracy for this task.
+
+    Code-wise the Keras example is unsurprisingly much simpler. The TensorFlow network appears to have two hidden layers of 100 nodes each
+    which seems to be quite a bit larger than the Keras example with only 512 nodes on one layer.
+
+    Given an accuracy of .95 as the baseline, I'm quite happy with that.
+    The one thing I might try would be some form of early stopping, since the LogLoss graph
+    is showing the training logloss beginning to diverge from the validation logloss after a period or so.
+
 c. Task 3: What differences can you see between the visualizations for 10 steps and 1000 steps?
+
+    Strangely I can't seem to find the right parameters for the steps. It appears that the defaults were already using
+    1000 steps, but even after bumping up the steps to 100,000 I wasn't seeing anything different in the plots. They
+    all just looked sort of blurry features. I fancy I can see parts of numbers, but mostly it's just a little line
+    or a little curve. That's the same for both levels I was able to look at.

@@ -1,6 +1,40 @@
 a. Task 1: Is a linear model ever preferable to a deep NN model?
+
+    Because linear models are typically simpler and have less parameters to tweak,
+    they are often much faster to train than neural nets. And so in cases where you
+    don't need the extra complexity provided by a neural net, a linear model might
+    be as good a model and much quicker to work with.
+
 b. Task 2: Does the NN model do better than the linear model?
+
+    Nope. The accuracy went down by about 2.6%. 
+
 c. Task 3: Do embeddings do much good for sentiment analysis tasks?
+
+    I would imagine so. Adding the embedding only brought us back up by 2 or 3 %, but
+    just like CNN's allow us to focus on particular features anywhere in an image,
+    encoding a text stream as a collection of embeddings seems to give us a similar ability
+    to isolate interesting features from a text document. If "love" shows up anywhere in 
+    a review, I suspect that typically gives us a good indication of that review's sentiment.
+
 d. Tasks 4–5: Name two words that have similar embeddings and explain why that makes sense.
+
+    "amazing", "excellent", and "fantastic" are all grouped together which would make sense since those
+    words tend to be more or less interchangeable in common usage.
+
 e. Task 6: Report your best hyper-parameters and their resulting performance.
-f. Optional Discussion: You can skip this section.
+
+    I decided to go whole hog and use the entire vocabulary file and got 81.3% accuracy.
+
+    Test set metrics:
+    loss 10.373313
+    accuracy_baseline 0.5
+    global_step 1000
+    recall 0.84416
+    auc 0.89388305
+    prediction/mean 0.5239579
+    precision 0.7963173
+    label/mean 0.5
+    average_loss 0.4149325
+    auc_precision_recall 0.88959444
+    accuracy 0.81412

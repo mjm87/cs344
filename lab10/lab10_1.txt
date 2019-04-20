@@ -1,0 +1,30 @@
+a. Would you rather use TensorFlow or Keras to build your models?
+
+I would definitely prefer using Keras. Looking through all the code necessary to get a simple model running in
+Tensorflow is not pretty. It's slightly convenient to be able to specify the layers in the array format here,
+but reading somebody else's code, I think I prefer Kera's stack of layers for readability purposes.
+
+b. Tasks 1:
+
+    Mine:
+
+    learning_rate=0.001,
+    steps=2000,
+    batch_size=100,
+    hidden_units = [10,20,30,40]
+
+    training RMSE: 100.73
+    validation RMSE: 101.82
+
+    Theirs:
+
+    learning_rate=0.001,
+    steps=2000,
+    batch_size=100,
+    hidden_units=[10, 10]
+
+    training RMSE: 102.20
+    validation RMSE: 108.79
+
+Tasks 2:
+    99.83

@@ -1,0 +1,35 @@
+a. What does AdaGrad do to boost performance?
+
+    Adagrad tweaks each parameter's learning rate independently to boost performance.
+
+b. Tasks 1–3: Report your best hyperparameter settings and their resulting performance.
+
+    Task 1:
+
+        tf.train.GradientDescentOptimizer(learning_rate=0.0014),
+        steps=2500,
+        batch_size=140,
+        hidden_units=[10, 10]
+
+        train RMSE: 90.29
+        valid RMSE: 89.83
+
+    Task 2:
+
+        learning_rate = 0.05
+        steps = 2000
+        batch_size = 50
+        hidden_units = [10, 10]
+
+        AdagradOptimizer -->
+            train RMSE: 72.06
+            valid RMSE: 71.89
+
+        AdamOptimizer -->
+            train RMSE: 67.01
+            valid RMSE: 67.04
+
+
+    Task 3:
+
+        I decided to normalize with the z_score normalization and got final RMSEs of 72.38 (train) and 72.48 (validation).
